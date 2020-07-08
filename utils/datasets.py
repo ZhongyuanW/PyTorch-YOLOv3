@@ -111,10 +111,12 @@ class ListDataset(Dataset):
             x2 = w_factor * (boxes[:, 1] + boxes[:, 3] / 2)
             y2 = h_factor * (boxes[:, 2] + boxes[:, 4] / 2)
             # Adjust for added padding
+            
+            ### TODO  这里应该是都加左边和上边的pad ###
             x1 += pad[0]
-            y1 += pad[2]
-            x2 += pad[1]
-            y2 += pad[3]
+            y1 += pad[1]
+            x2 += pad[0]
+            y2 += pad[1]
             # Returns (x, y, w, h)
             boxes[:, 1] = ((x1 + x2) / 2) / padded_w
             boxes[:, 2] = ((y1 + y2) / 2) / padded_h
